@@ -1,0 +1,89 @@
+$('input[name="republicancb"]').change(function(){
+    for (var i = 0; i < senateMembers.length; i++)
+    if($(this).is(':checked') && senateMembers[i].party == "R") {
+        function displayData (); 
+    } else {
+        // Checkbox is not checked..
+    }
+});
+       <div class="states">
+            <div class="dropdown2">
+                <button2 onclick="myFunction()" class="dropbtn2">Sort Senators By State</button2>
+            <div id="myDropdown2" class="dropdown-content2">
+            <a href="#about">Alabama</a>
+            <a href="#base">Alaska</a>
+            <a href="#blog">Arizona</a>
+            <a href="#contact">Arkansas</a>
+            <a href="#custom">California</a>
+            <a href="#support">Colorado</a>
+            <a href="#tools">Connecticut</a>
+            <a href="#about">Delaware</a>
+            <a href="#base">Florida</a>
+            <a href="#blog">Georgia</a>
+            <a href="#contact">Hawaii</a>
+            <a href="#custom">Idaho</a>
+            <a href="#support">Illinois</a>
+            <a href="#tools">Indiana</a>
+            <a href="#about">Iowa</a>
+            <a href="#base">Kansas</a>
+            <a href="#blog">Kentucky</a>
+            <a href="#contact">Louisana</a>
+            <a href="#custom">Maine</a>
+            <a href="#support">Maryland</a>
+            <a href="#tools">Massachusetts</a>
+            <a href="#about">Michigan</a>
+            <a href="#base">Minnesota</a>
+            <a href="#blog">Mississippi</a>
+            <a href="#contact">Missouri</a>
+            <a href="#custom">Montana</a>
+            <a href="#support">Nebraska</a>
+            <a href="#tools">Nevada</a>
+            <a href="#about">New Hampshire</a>
+            <a href="#base">New Jersey</a>
+            <a href="#blog">New Mexico</a>
+            <a href="#contact">New York</a>
+            <a href="#custom">North Carolina</a>
+            <a href="#support">North Dakota</a>
+            <a href="#tools">Ohio</a>
+            <a href="#about">Oklahoma</a>
+            <a href="#base">Oregon</a>
+            <a href="#blog">Pennsylvania</a>
+            <a href="#contact">Rhode Island</a>
+            <a href="#custom">South Carolina</a>
+            <a href="#support">South Dakota</a>
+            <a href="#tools">Tennessee</a>
+            <a href="#about">Texas</a>
+            <a href="#base">Utah</a>
+            <a href="#blog">Vermont</a>
+            <a href="#contact">Virginia</a>
+            <a href="#custom">Washington</a>
+            <a href="#support">West Virginia</a>
+            <a href="#tools">Wisconsin</a>
+            <a href="#about">Wyoming</a>
+  </div>
+</div>
+
+function stateList() {
+    var allMemberState = [];
+    var uniqueState = [];
+    for (i = 0, i < senateMembers.length; i++) {
+        allMemberState.push(senateMember[i].state);
+    }
+    allMemberState.sort ();
+    
+    for (i =; i < allMemberState.length; i++) {
+        if (!uniqueState.includes(allMemberSate[i]))
+    {
+        uniqueState.push(allMemberState[i]);
+    }
+    }
+
+for (i = 0, i < uniqueState.length; i++) {
+    var option =
+    document.createElement("option");
+    option.setAtrribute("value", uniqueState[i]);
+    option.innerHTML = uniqueState[i];
+    dropDownSelector.appendChild(option)
+}
+    
+}

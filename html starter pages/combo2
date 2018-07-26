@@ -1,0 +1,87 @@
+// CHANGING BETWEEN SENATE AND HOUSE JSONS DEPENDING ON ATTRIBUTE IN HTML
+var bodyElement = document.getElementById("body");
+var json = bodyElement.getAttribute("data-chambers");
+if (json === "senate") {
+    callApiSenateData();
+} else if (json === "house") {
+    callApiHouseData();
+}
+
+// SENATE AJAX CALL
+function callApiSenateData() {
+    fetch("https://api.propublica.org/congress/v1/113/senate/members.json", {
+            method: "GET",
+            headers: new Headers({
+                "X-API-Key": '1pbwyOY6uoByUBqUNzarMxuDp04aWsimswBC5Fwl'
+            })
+
+        })
+        .then(onDataFetched)
+        .catch(onDataFetchFailed);
+
+}
+// HOUSE AJAX CALL
+function callApiHouseData() {
+    fetch("https://api.propublica.org/congress/v1/113/house/members.json", {
+            method: "GET",
+            headers: new Headers({
+                "X-API-Key": '1pbwyOY6uoByUBqUNzarMxuDp04aWsimswBC5Fwl'
+            })
+
+        })
+        .then(onDataFetched)
+        .catch(onDataFetchFailed);
+
+}
+// IF DATA IS FETCHED, RESPOND
+function onDataFetched(response) {
+    response.json()
+        .then(onConversionToJsonSuccessful)
+        .catch(onConversionToJsonFailed);
+}
+// IF FECTH FAILS, ERROR
+function onDataFetchFailed(error) {}
+
+// IF RESPONSE IS SUCCESSFUL, DO STUFF
+function onConversionToJsonSuccessful(json) {
+    data = json;
+    Members = data.results[0].members;
+    // note that this does not add a new promise
+    console.log(data);
+    countMembers(Members, summary);
+    makeRow(summary);
+    Members.sort(sortByMissedAscending);
+    var myTopTen = topTenPercent(Members);
+    makeRowAttendance(myTopTen);
+    Members.sort(sortByMissedAscending2);
+    var myTopTen = topTenPercent(Members);
+    makeRowAttendance2(myTopTen);
+}
+// IF RESPONSE FAILS, NOT A JSON
+function onConversionToJsonFailed() {}
+
+var statistics = {
+
+    "glance": [
+        {
+            "party": "Republicans",
+            "reps": 0,
+            "votes_with_party_pct": 0
+    },
+        {
+            "party": "Democrats",
+            "reps": 0,
+            "votes_with_party_pct": 0
+    },
+        {
+            "party": "Independents",
+            "reps": 0,
+            "votes_with_party_pct": 0
+    }
+    ]
+}
+
+var summary = statistics.glance;
+countMembers(Members, summary);
+
+makeRow(summary);

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <link rel="stylesheet" href="politic.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Karla" rel="stylesheet">
+    <link rel="stylesheet" href="politic.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="home.js"></script>
+</head>
+
+<body id="body" data-chambers="senate">
+    <div class="header">
+        <div class="donaldtrump">
+            <a href="#"><img class="donaldtrump" src="trump.png" alt="donald"></a>
+        </div>
+        <div class="logoarea">
+            <a href="#"><img class="logo" src="tgiflogo.png" alt="tgif"></a>
+        </div>
+        <div class="emailus">
+            <p>
+                <a href="mailto:info@tgif.com?Subject=Hi%20there" target="_top">&#9889; Email Us</a>
+            </p>
+        </div>
+    </div>
+    <div class="navbar">
+        <a href="home-starter-page.html">Home</a>
+        <div class="dropdown">
+            <button class="dropbtn">113th Congress 
+                    <i class="fa fa-caret-down"></i>
+                    </button>
+            <div class="dropdown-content">
+                <a href="senate-starter-page.html">Senate</a>
+                <a href="house-starter-page.html">House</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">Attendance 
+                    <i class="fa fa-caret-down"></i>
+                    </button>
+            <div class="dropdown-content">
+                <a href="senate_attendance.html">Senate</a>
+                <a href="house_attendance.html">House</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">Party Loyalty 
+                    <i class="fa fa-caret-down"></i>
+                    </button>
+            <div class="dropdown-content">
+                <a href="#">Senate</a>
+                <a href="house_loyalty.html">House</a>
+            </div>
+        </div>
+    </div>
+    <div class="maintext2">
+        <div class="topPart1">
+            <div>
+                <h2 class="leftTop">Party Loyalty</h2>
+            </div>
+            <div class="leftTop">
+                <p>Those who consider themselves to be strong partisans, strong Democrats and strong Republicans respectively, tend to be the most faithful in voting for their party's nominee for office and legislation that backs their party's agenda. </p>
+            </div>
+        </div>
+        <div class="topPart2">
+            <div>
+                <h3 class="partyTotal">Senate at a Glance</h3>
+            </div>
+            <div class="partyTotal2">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Party</th>
+                            <th>Number of Reps</th>
+                            <th>% Voted with Party</th>
+                        </tr>
+                    </thead>
+                    <tbody id="Totals">
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="maintext3">
+        <div class="rightSection">
+            <div>
+                <h3>Least Loyal (Bottom 10% of Party)</h3>
+            </div>
+            <div></div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Number Party Votes</th>
+                        <th>% Party Votes</th>
+                    </tr>
+                </thead>
+                <tbody id="-attendance2"></tbody>
+            </table>
+        </div>
+        <div class="rightSection">
+            <div>
+                <h3 class="rightHeader">Most Loyal (Top 10% of Party)</h3>
+            </div>
+            <div class="rightHeader">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Number Party Votes</th>
+                            <th>% Party Votes</th>
+                        </tr>
+                    </thead>
+                    <tbody id="-attendance">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2016 TGIF All Rights Reserved</p>
+    </footer>
+    <!--        <script src="senate.js"></script>-->
+    <script src="combo2.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</body>
+
+</html>

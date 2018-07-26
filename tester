@@ -1,0 +1,276 @@
+var data;
+var senateMembers;
+
+console.log(data);
+
+var app = new Vue({  
+  el: '#app',
+  data: {    
+    senateInfo: [],
+    first_name: [0],
+    last_name: [0],
+    state: [],
+    votes_with_party_pct: [],
+    makeList: [],
+    stateList: [],
+    party: [1],
+    seniority: [2],
+    makerow: []
+  }
+})
+fetch("https://api.propublica.org/congress/v1/113/senate/members.json", {
+
+    method: "GET",
+    headers: {
+        'X-API-Key': 'qsB6fSabIzyfNBsweDBQO7mdCL5Mb3eQXI7DhVB2'
+    }
+}).then(function (response) {
+
+    if (response.ok) {
+        // add a new promise to the chain
+        return response.json();
+    }
+    // signal a server error to the chain
+    throw new Error(response.statusText);
+}).then(function (json) {
+    data = json;
+    senateMembers = data.results[0].members;
+    console.log(senateMembers);
+    // note that this does not add a new promise
+    console.log(data);
+    stateList();
+    makeTable();
+    app.senateInfo = data.results[0].members;
+    app.makeList = data.results[0].members;
+    app.stateList = data.results[0].members;
+    app.first_name = data.results[0].members;
+    app.last_name = data.results[0].members;
+    app.stateList = data.results[0].members;
+    app.votes_with_party_pct = data.results[0].members;
+    app.party = data.results[0].members;
+    app.seniority = data.results[0].members;
+}).catch(function (error) {
+    // called when an error occurs anywhere in the chain
+    console.log("Request failed: " + error.message);
+});
+
+
+var republicancb = document.getElementById("republicancb");
+var democratcb = document.getElementById("democratcb");
+var independentcb = document.getElementById("independentcb");
+/*var dropDownSelector = document.getElementId("filter-state");*/
+/*
+dropDownSelector.addEventListener("change", makeTable;)*/
+
+republicancb.addEventListener('click', makeTable);
+
+democratcb.addEventListener('click', makeTable);
+
+independentcb.addEventListener('click', makeTable);
+var dropDownSelector = document.getElementById("filter-state");
+dropDownSelector.addEventListener("change", makeTable);
+
+
+
+function stateList() {
+    var allMemberState = [];
+    var uniqueState = [];
+    for (i = 0; i < senateMembers.length; i++) {
+        allMemberState.push(senateMembers[i].state);
+    }
+    console.log(allMemberState);
+    allMemberState.sort();
+
+    for (i = 0; i < allMemberState.length; i++) {
+        if (!uniqueState.includes(allMemberState[i])) {
+
+            uniqueState.push(allMemberState[i]);
+        }
+    }
+    for (i = 0; i < uniqueState.length; i++) {
+        var option =
+            document.createElement("option");
+        option.setAttribute("value", uniqueState[i]);
+        option.innerHTML = uniqueState[i];
+        dropDownSelector.appendChild(option)
+    }
+    return uniqueState;
+}
+
+function makeTable() {
+
+    $('#senate-data').empty();
+
+    if (!republicancb.checked && !democratcb.checked && !independentcb.checked) {
+        console.log("nothing checked");
+        return false;
+    } else {
+
+        for (var i = 0; i < senateMembers.length; i++) {
+
+
+
+            if ((senateMembers[i].state === document.getElementById("filter-state").value) || (document.getElementById("filter-state").value === "All")) {
+
+
+                if (republicancb.checked && senateMembers[i].party === "R") {
+
+                    var row = makeRow(senateMembers[i]);
+                    document.getElementById('senate-data').append(row);
+
+                }
+
+                if (democratcb.checked && senateMembers[i].party === "D") {
+
+                    var row = makeRow(senateMembers[i]);
+                    document.getElementById('senate-data').append(row);
+                }
+                if (independentcb.checked && senateMembers[i].party === "I") {
+
+                    var row = makeRow(senateMembers[i]);
+                    document.getElementById('senate-data').append(row);
+                }
+
+            }
+            /*if (selectedState === senateMembers[i].state) {
+            var row = makeRow(senateMembers[i]);
+                document.getElementById('filter-state').append(row);
+                }*/
+        }
+
+    }
+
+}
+
+function makeRow(member) {
+    var tr = document.createElement("tr");
+
+    var td = document.createElement("td");
+    var a = document.createElement("a");
+    a.textContent = member.first_name + " " + member.last_name;
+    a.setAttribute("href", member.url);
+    td.appendChild(a);
+    tr.appendChild(td);
+
+
+    var td = document.createElement("td");
+    td.innerHTML = member.party;
+    tr.appendChild(td);
+
+
+    var td = document.createElement("td");
+    td.innerHTML = member.seniority;
+    tr.appendChild(td);
+
+
+    var td = document.createElement("td");
+    td.innerHTML = member.votes_with_party_pct;
+    tr.appendChild(td);
+
+    return tr;
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <link rel="stylesheet" href="politic.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Karla" rel="stylesheet">
+</head>
+
+<body>
+    <div class="header">
+        <div class="donaldtrump">
+            <a href="#"><img class="donaldtrump" src="trump.png" alt="donald"></a>
+        </div>
+        <div class="logoarea">
+            <a href="#"><img class="logo" src="tgiflogo.png" alt="tgif"></a>
+        </div>
+        <div class="emailus">
+            <p>
+                <a href="mailto:info@tgif.com?Subject=Hi%20there" target="_top">&#9889; Email Us</a>
+            </p>
+        </div>
+    </div>
+    <div class="navbar">
+        <a href="home-starter-page.html">Home</a>
+        <div class="dropdown">
+            <button class="dropbtn">113th Congress 
+                    <i class="fa fa-caret-down"></i>
+                    </button>
+            <div class="dropdown-content">
+                <a href="#">Senate</a>
+                <a href="house-starter-page.html">House</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">Attendance 
+                    <i class="fa fa-caret-down"></i>
+                    </button>
+            <div class="dropdown-content">
+                <a href="senate_attendance.html">Senate</a>
+                <a href="house_attendance.html">House</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">Party Loyalty 
+                    <i class="fa fa-caret-down"></i>
+                    </button>
+            <div class="dropdown-content">
+                <a href="senate_house-party-loyalty-starter-page.html">Senate</a>
+                <a href="house_loyalty.html">House</a>
+            </div>
+        </div>
+    </div>
+
+    <!--Table container-->
+    <div class="maintextHome" S>
+        <h2>Senators</h2>
+        <p>First convened in 1789, the composition and powers of the Senate are established in Article One of the U.S. Constitution. Each state is represented by two senators, regardless of population, who serve staggered six-year terms. The Senate has several exclusive powers not granted to the House, including consenting to treaties as a precondition to their ratification and consenting to or confirming appointments of Cabinet secretaries, federal judges, other federal executive officials, military officers, regulatory officials, ambassadors, and other federal uniformed officers, as well as trial of federal officials impeached by the House.</p>
+        <div class="filterNav">
+            <div class="partycheck" id="checkboxes">
+                <input id="republicancb" type="checkbox" name="republicancb" checked/>Republican
+                <input id="democratcb" type="checkbox" name="democratcb" checked/>Democrat
+                <input id="independentcb" type="checkbox" name="independentcb" checked/>Independent
+            </div>
+            <div class="states">
+                <select id="filter-state" name="filter">
+                    <option class="choice" value="All">Choose State</option>
+                    
+            </select>
+            </div>
+        </div>
+        <div class="container" id="app">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Member Name</th>
+                        <th>Party</th>
+                        <th>Years in Office</th>
+                        <th>Vote With Party Percentage</th>
+                    </tr>
+                </thead>
+                <tbody id="senate-data">
+                    <tr v-for="(value, key) in senateInfo.data">
+                        <td>{{value.first_name}} {{value.middle_name}} {{value.last_name}}</td>
+                        <td>{{value.party}}</td>
+                        <td>{{value.seniority}}</td>
+                        <td>{{value.votes_with_party_pct}}</td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2016 TGIF All Rights Reserved</p>
+    </footer>
+    <!--    <script src="senate.js"></script>-->
+    <script src="senatepage.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+
+</body>
+
+</html>
