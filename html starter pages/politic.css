@@ -4,6 +4,9 @@ body {
 
 
 }
+th, td {
+    border-bottom: 1px solid #ddd;
+}
 
 /* This is the center section on all pages */
 
